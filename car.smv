@@ -1,0 +1,703 @@
+-- by Syed Ahtsham (04071813015)
+-- STT Summer 2022
+
+MODULE main
+
+
+VAR
+state : {S1, S2, S3, S4, S5, S6, S7, S8};
+modeBit1 : boolean;
+modeBit2 : boolean;
+speedBit1 : boolean;
+speedBit2 : boolean;
+buttonBit : boolean;
+
+IVAR
+
+input : {brake, acc, dec, gas, button};
+
+
+
+ASSIGN
+init(state) := S1;
+
+init(modeBit1) := FALSE;
+init(modeBit2) := FALSE;
+init(speedBit1) := FALSE;
+init(speedBit2) := FALSE;
+init(buttonBit) := FALSE;
+
+
+
+next(state):= case
+
+
+	state = S1 & input = brake:  S1;
+	state = S1 & input = acc:  S2;
+	state = S1 & input = dec:  S1;
+	state = S1 & input = gas:  S2;
+	state = S1 & input = button:  S3;
+	
+
+	state = S2 & input = brake:  S1;
+	state = S2 & input = acc:  S7;
+	state = S2 & input = dec:  S1;
+	state = S2 & input = gas:  S7;
+	state = S2 & input = button:  S4;
+
+	state = S3 & input = brake:  S3;
+	state = S3 & input = acc:  S4;
+	state = S3 & input = dec:  S3;
+	state = S3 & input = gas:  S4;
+	state = S3 & input = button:  S1;
+
+	state = S4 & input = brake:  S6;
+	state = S4 & input = acc:  S4;
+	state = S4 & input = dec:  S4;
+	state = S4 & input = gas:  S5;
+	state = S4 & input = button:  S2;
+
+	state = S5 & input = brake:  S4;
+	state = S5 & input = acc:  S5;
+	state = S5 & input = dec:  S4;
+	state = S5 & input = gas:  S5;
+	state = S5 & input = button:  S7;
+
+	state = S6 & input = brake:  S6;
+	state = S6 & input = acc:  S4;
+	state = S6 & input = dec:  S6;
+	state = S6 & input = gas:  S4;
+	state = S6 & input = button:  S1;
+
+	state = S7 & input = brake:  S2;
+	state = S7 & input = acc:  S7;
+	state = S7 & input = dec:  S2;
+	state = S7 & input = gas:  S7;
+	state = S7 & input = button:  S8;
+
+	state = S8 & input = brake:  S4;
+	state = S8 & input = acc:  S8;
+	state = S8 & input = dec:  S4;
+	state = S8 & input = gas:  S8;
+	state = S8 & input = button:  S7;
+
+	--TRUE : state;
+esac;
+
+
+next(modeBit1):= case
+	
+	state = S1 & input = brake:  FALSE;
+	state = S1 & input = acc:  FALSE;
+	state = S1 & input = dec:  FALSE;
+	state = S1 & input = gas:  FALSE;
+	state = S1 & input = button:  FALSE;
+
+	state = S2 & input = brake:  FALSE;
+	state = S2 & input = acc:  FALSE;
+	state = S2 & input = dec:  FALSE;
+	state = S2 & input = gas:  FALSE;
+	state = S2 & input = button:  FALSE;
+
+	state = S3 & input = brake:  FALSE;
+	state = S3 & input = acc:  FALSE;
+	state = S3 & input = dec:  FALSE;
+	state = S3 & input = gas:  FALSE;
+	state = S3 & input = button:  FALSE;
+
+	state = S4 & input = brake:  TRUE;
+	state = S4 & input = acc:  FALSE;
+	state = S4 & input = dec:  FALSE;
+	state = S4 & input = gas:  TRUE;
+	state = S4 & input = button:  FALSE;
+
+	state = S5 & input = brake:  FALSE;
+	state = S5 & input = acc:  TRUE;
+	state = S5 & input = dec:  FALSE;
+	state = S5 & input = gas:  TRUE;
+	state = S5 & input = button:  FALSE;
+
+	state = S6 & input = brake:  TRUE;
+	state = S6 & input = acc:  FALSE;
+	state = S6 & input = dec:  TRUE;
+	state = S6 & input = gas:  FALSE;
+	state = S6 & input = button:  FALSE;
+
+	state = S7 & input = brake:  FALSE;
+	state = S7 & input = acc:  FALSE;
+	state = S7 & input = dec:  FALSE;
+	state = S7 & input = gas:  FALSE;
+	state = S7 & input = button:  FALSE;
+
+	state = S8 & input = brake:  FALSE;
+	state = S8 & input = acc:  FALSE;
+	state = S8 & input = dec:  FALSE;
+	state = S8 & input = gas:  FALSE;
+	state = S8 & input = button:  FALSE;
+
+	--TRUE : modeBit1;
+esac;
+	
+
+next(modeBit2):= case
+
+	state = S1 & input = brake:  FALSE;
+	state = S1 & input = acc:  FALSE;
+	state = S1 & input = dec:  FALSE;
+	state = S1 & input = gas:  FALSE;
+	state = S1 & input = button:  FALSE;
+
+	state = S2 & input = brake:  FALSE;
+	state = S2 & input = acc:  FALSE;
+	state = S2 & input = dec:  FALSE;
+	state = S2 & input = gas:  FALSE;
+	state = S2 & input = button:  TRUE;
+
+	state = S3 & input = brake:  FALSE;
+	state = S3 & input = acc:  TRUE;
+	state = S3 & input = dec:  FALSE;
+	state = S3 & input = gas:  TRUE;
+	state = S3 & input = button:  FALSE;
+
+	state = S4 & input = brake:  FALSE;
+	state = S4 & input = acc:  TRUE;
+	state = S4 & input = dec:  TRUE;
+	state = S4 & input = gas:  FALSE;
+	state = S4 & input = button:  FALSE;
+
+	state = S5 & input = brake:  TRUE;
+	state = S5 & input = acc:  FALSE;
+	state = S5 & input = dec:  TRUE;
+	state = S5 & input = gas:  FALSE;
+	state = S5 & input = button:  FALSE;
+
+	state = S6 & input = brake:  FALSE;
+	state = S6 & input = acc:  TRUE;
+	state = S6 & input = dec:  FALSE;
+	state = S6 & input = gas:  TRUE;
+	state = S6 & input = button:  FALSE;
+
+	state = S7 & input = brake:  FALSE;
+	state = S7 & input = acc:  FALSE;
+	state = S7 & input = dec:  FALSE;
+	state = S7 & input = gas:  FALSE;
+	state = S7 & input = button:  FALSE;
+
+	state = S8 & input = brake:  TRUE;
+	state = S8 & input = acc:  FALSE;
+	state = S8 & input = dec:  TRUE;
+	state = S8 & input = gas:  FALSE;
+	state = S8 & input = button:  FALSE;
+
+	--TRUE : modeBit2;
+esac;
+
+
+next(speedBit1):= case
+
+	state = S1 & input = brake:  FALSE;
+	state = S1 & input = acc:  FALSE;
+	state = S1 & input = dec:  FALSE;
+	state = S1 & input = gas:  FALSE;
+	state = S1 & input = button:  FALSE;
+
+	state = S2 & input = brake:  FALSE;
+	state = S2 & input = acc:  TRUE;
+	state = S2 & input = dec:  FALSE;
+	state = S2 & input = gas:  TRUE;
+	state = S2 & input = button:  FALSE;
+
+	state = S3 & input = brake:  FALSE;
+	state = S3 & input = acc:  FALSE;
+	state = S3 & input = dec:  FALSE;
+	state = S3 & input = gas:  FALSE;
+	state = S3 & input = button:  FALSE;
+
+	state = S4 & input = brake:  FALSE;
+	state = S4 & input = acc:  FALSE;
+	state = S4 & input = dec:  FALSE;
+	state = S4 & input = gas:  TRUE;
+	state = S4 & input = button:  FALSE;
+
+	state = S5 & input = brake:  FALSE;
+	state = S5 & input = acc:  TRUE;
+	state = S5 & input = dec:  FALSE;
+	state = S5 & input = gas:  TRUE;
+	state = S5 & input = button:  TRUE;
+
+	state = S6 & input = brake:  FALSE;
+	state = S6 & input = acc:  FALSE;
+	state = S6 & input = dec:  FALSE;
+	state = S6 & input = gas:  FALSE;
+	state = S6 & input = button:  FALSE;
+
+	state = S7 & input = brake:  FALSE;
+	state = S7 & input = acc:  TRUE;
+	state = S7 & input = dec:  FALSE;
+	state = S7 & input = gas:  TRUE;
+	state = S7 & input = button:  TRUE;
+
+	state = S8 & input = brake:  FALSE;
+	state = S8 & input = acc:  TRUE;
+	state = S8 & input = dec:  FALSE;
+	state = S8 & input = gas:  TRUE;
+	state = S8 & input = button:  TRUE;
+
+	--TRUE : speedBit1;
+esac;
+
+
+next(speedBit2):= case
+
+	state = S1 & input = brake:  FALSE;
+	state = S1 & input = acc:  TRUE;
+	state = S1 & input = dec:  FALSE;
+	state = S1 & input = gas:  TRUE;
+	state = S1 & input = button:  FALSE;
+
+	state = S2 & input = brake:  FALSE;
+	state = S2 & input = acc:  FALSE;
+	state = S2 & input = dec:  FALSE;
+	state = S2 & input = gas:  FALSE;
+	state = S2 & input = button:  TRUE;
+
+	state = S3 & input = brake:  FALSE;
+	state = S3 & input = acc:  TRUE;
+	state = S3 & input = dec:  FALSE;
+	state = S3 & input = gas:  TRUE;
+	state = S3 & input = button:  FALSE;
+
+	state = S4 & input = brake:  FALSE;
+	state = S4 & input = acc:  TRUE;
+	state = S4 & input = dec:  TRUE;
+	state = S4 & input = gas:  FALSE;
+	state = S4 & input = button:  TRUE;
+
+	state = S5 & input = brake:  TRUE;
+	state = S5 & input = acc:  FALSE;
+	state = S5 & input = dec:  TRUE;
+	state = S5 & input = gas:  FALSE;
+	state = S5 & input = button:  FALSE;
+
+	state = S6 & input = brake:  FALSE;
+	state = S6 & input = acc:  TRUE;
+	state = S6 & input = dec:  FALSE;
+	state = S6 & input = gas:  TRUE;
+	state = S6 & input = button:  FALSE;
+
+	state = S7 & input = brake:  TRUE;
+	state = S7 & input = acc:  FALSE;
+	state = S7 & input = dec:  TRUE;
+	state = S7 & input = gas:  FALSE;
+	state = S7 & input = button:  FALSE;
+
+	state = S8 & input = brake:  TRUE;
+	state = S8 & input = acc:  FALSE;
+	state = S8 & input = dec:  TRUE;
+	state = S8 & input = gas:  FALSE;
+	state = S8 & input = button:  FALSE;
+
+	--TRUE : speedBit2;
+esac;
+
+
+next(buttonBit):= case
+
+	state = S1 & input = brake:  FALSE;
+	state = S1 & input = acc:  FALSE;
+	state = S1 & input = dec:  FALSE;
+	state = S1 & input = gas:  FALSE;
+	state = S1 & input = button:  TRUE;
+
+	state = S2 & input = brake:  FALSE;
+	state = S2 & input = acc:  FALSE;
+	state = S2 & input = dec:  FALSE;
+	state = S2 & input = gas:  FALSE;
+	state = S2 & input = button:  TRUE;
+
+	state = S3 & input = brake:  TRUE;
+	state = S3 & input = acc:  TRUE;
+	state = S3 & input = dec:  TRUE;
+	state = S3 & input = gas:  TRUE;
+	state = S3 & input = button:  FALSE;
+
+	state = S4 & input = brake:  TRUE;
+	state = S4 & input = acc:  TRUE;
+	state = S4 & input = dec:  TRUE;
+	state = S4 & input = gas:  TRUE;
+	state = S4 & input = button:  FALSE;
+
+	state = S5 & input = brake:  TRUE;
+	state = S5 & input = acc:  TRUE;
+	state = S5 & input = dec:  TRUE;
+	state = S5 & input = gas:  TRUE;
+	state = S5 & input = button:  FALSE;
+
+	state = S6 & input = brake:  TRUE;
+	state = S6 & input = acc:  TRUE;
+	state = S6 & input = dec:  TRUE;
+	state = S6 & input = gas:  TRUE;
+	state = S6 & input = button:  FALSE;
+
+	state = S7 & input = brake:  FALSE;
+	state = S7 & input = acc:  FALSE;
+	state = S7 & input = dec:  FALSE;
+	state = S7 & input = gas:  FALSE;
+	state = S7 & input = button:  FALSE;
+
+	state = S8 & input = brake:  TRUE;
+	state = S8 & input = acc:  FALSE;
+	state = S8 & input = dec:  TRUE;
+	state = S8 & input = gas:  FALSE;
+	state = S8 & input = button:  FALSE;
+
+	--TRUE : buttonBit;
+esac;
+
+
+
+
+
+
+
+
+
+LTLSPEC
+
+-- Node Coverage - NC
+
+	-- S1 = 00000
+	--G!(!modeBit1 & !modeBit2 & !speedBit1 & !speedBit2 & !buttonBit)
+
+	-- S2 = 00010
+	--G!(!modeBit1 & !modeBit2 & !speedBit1 & speedBit2 & !buttonBit)
+
+	-- S3 = 00001
+	--G!(!modeBit1 & !modeBit2 & !speedBit1 & !speedBit2 & buttonBit)
+
+	-- S4 = 01011
+	--G!(!modeBit1 & modeBit2 & !speedBit1 & speedBit2 & buttonBit)
+
+	-- S5 = 10101
+	--G!(modeBit1 & !modeBit2 & speedBit1 & !speedBit2 & buttonBit)
+
+	-- S6 = 10001
+	--G!(modeBit1 & !modeBit2 & !speedBit1 & !speedBit2 & buttonBit)
+
+	-- S7 = 00100
+	--G!(!modeBit1 & !modeBit2 & speedBit1 & !speedBit2 & !buttonBit)
+
+	-- S8 = 00101
+	--G!(!modeBit1 & !modeBit2 & speedBit1 & !speedBit2 & buttonBit)
+	
+	--G!(state = S8)
+
+
+-- Edge Coverage - EC
+
+	-- Edges outgoing from S1
+
+	--G(state = S1 & input = brake -> X !(state = S1))
+	--G(state = S1 & input = dec -> X !(state = S1))
+	--G(state = S1 & input = acc -> X !(state = S2))
+	--G(state = S1 & input = gas -> X !(state = S2))
+	--G(state = S1 & input = button -> X !(state = S3))
+
+
+	-- Edges outgoing from S2
+
+	--G(state = S2 & input = brake -> X !(state = S1))
+	--G(state = S2 & input = dec -> X !(state = S1))
+	--G(state = S2 & input = acc -> X !(state = S7))
+	--G(state = S2 & input = gas -> X !(state = S7))
+	--G(state = S2 & input = button -> X !(state = S4))
+
+
+	-- Edges outgoing from S3
+
+	--G(state = S3 & input = brake -> X !(state = S3))
+	--G(state = S3 & input = dec -> X !(state = S3))
+	--G(state = S3 & input = acc -> X !(state = S4))
+	--G(state = S3 & input = gas -> X !(state = S4))
+	--G(state = S3 & input = button -> X !(state = S1))
+
+
+	-- Edges outgoing from S4
+
+	--G(state = S4 & input = brake -> X !(state = S6))
+	--G(state = S4 & input = dec -> X !(state = S4))
+	--G(state = S4 & input = acc -> X !(state = S4))
+	--G(state = S4 & input = gas -> X !(state = S5))
+	--G(state = S4 & input = button -> X !(state = S2))
+
+
+	-- Edges outgoing from S5
+
+	--G(state = S5 & input = brake -> X !(state = S4))
+	--G(state = S5 & input = dec -> X !(state = S4))
+	--G(state = S5 & input = acc -> X !(state = S5))
+	--G(state = S5 & input = gas -> X !(state = S5))
+	--G(state = S5 & input = button -> X !(state = S7))
+
+
+	-- Edges outgoing from S6
+
+	--G(state = S6 & (input = brake) -> X !(state = S6))
+	--G(state = S6 & input = dec -> X !(state = S6))
+	--G(state = S6 & input = acc -> X !(state = S4))
+	--G(state = S6 & input = gas -> X !(state = S4))
+	--G(state = S6 & input = button -> X !(state = S1))
+
+
+	-- Edges outgoing from S7
+
+	--G(state = S7 & input = brake -> X !(state = S2))
+	--G(state = S7 & input = dec -> X !(state = S2))
+	--G(state = S7 & input = acc -> X !(state = S7))
+	--G(state = S7 & input = gas -> X !(state = S7))
+	--G(state = S7 & input = button -> X !(state = S8))
+
+
+	-- Edges outgoing from S8
+
+	--G(state = S8 & input = brake -> X !(state = S4))
+	--G(state = S8 & input = dec -> X !(state = S4))
+	--G(state = S8 & input = acc -> X !(state = S8))
+	--G(state = S8 & input = gas -> X !(state = S8))
+	--G(state = S8 & input = button -> X !(state = S7))
+
+
+
+
+-- Condition Coverage - CC
+
+
+	--G(state = S1 & input = brake -> X !(state = S1))
+	--G(state = S1 & !(input = brake) -> X !(state = S1))
+
+	--G(state = S1 & input = dec -> X !(state = S1))
+	--G(state = S1 & !(input = dec) -> X !(state = S1))
+
+	--G(state = S1 & input = acc -> X !(state = S2))
+	--G(state = S1 & !(input = acc) -> X !(state = S2))
+
+	--G(state = S1 & input = gas -> X !(state = S2))
+	--G(state = S1 & !(input = gas) -> X !(state = S2))
+
+	--G(state = S1 & input = button -> X !(state = S3))
+	--G(state = S1 & !(input = button) -> X !(state = S3))
+
+
+
+
+	--G(state = S2 & input = brake -> X !(state = S1))
+	--G(state = S2 & !(input = brake) -> X !(state = S1))
+
+	--G(state = S2 & input = dec -> X !(state = S1))
+	--G(state = S2 & !(input = dec) -> X !(state = S1))
+
+	--G(state = S2 & input = acc -> X !(state = S7))
+	--G(state = S2 & !(input = acc) -> X !(state = S7))
+
+	--G(state = S2 & input = gas -> X !(state = S7))
+	--G(state = S2 & !(input = gas) -> X !(state = S7))
+
+	--G(state = S2 & input = button -> X !(state = S4))
+	--G(state = S2 & !(input = button) -> X !(state = S4))
+
+
+
+	--G(state = S3 & input = brake -> X !(state = S3))
+	--G(state = S3 & !(input = brake) -> X !(state = S3))
+
+	--G(state = S3 & input = dec -> X !(state = S3))
+	--G(state = S3 & !(input = dec) -> X !(state = S3))
+
+	--G(state = S3 & input = acc -> X !(state = S4))
+	--G(state = S3 & !(input = acc) -> X !(state = S4))
+
+	--G(state = S3 & input = gas -> X !(state = S4))
+	--G(state = S3 & !(input = gas) -> X !(state = S4))
+
+	--G(state = S3 & input = button -> X !(state = S1))
+	--G(state = S3 & !(input = button) -> X !(state = S1))
+
+
+
+	--G(state = S4 & input = brake -> X !(state = S6))
+	--G(state = S4 & !(input = brake) -> X !(state = S6))
+
+	--G(state = S4 & input = dec -> X !(state = S4))
+	--G(state = S4 & !(input = dec) -> X !(state = S4))
+
+	--G(state = S4 & input = acc -> X !(state = S4))
+	--G(state = S4 & !(input = acc) -> X !(state = S4))
+
+	--G(state = S4 & input = gas -> X !(state = S5))
+	--G(state = S4 & !(input = gas) -> X !(state = S5))
+
+	--G(state = S4 & input = button -> X !(state = S2))
+	--G(state = S4 & !(input = button) -> X !(state = S2))
+
+
+
+	--G(state = S5 & input = brake -> X !(state = S4))
+	--G(state = S5 & !(input = brake) -> X !(state = S4))
+
+	--G(state = S5 & input = dec -> X !(state = S4))
+	--G(state = S5 & !(input = dec) -> X !(state = S4))
+
+	--G(state = S5 & input = acc -> X !(state = S5))
+	--G(state = S5 & !(input = acc) -> X !(state = S5))
+
+	--G(state = S5 & input = gas -> X !(state = S5))
+	--G(state = S5 & !(input = gas) -> X !(state = S5))
+
+	--G(state = S5 & input = button -> X !(state = S7))
+	--G(state = S5 & !(input = button) -> X !(state = S7))
+
+
+	--G(state = S6 & input = brake -> X !(state = S6))
+	--G(state = S6 & !(input = brake) -> X !(state = S6))
+
+	--G(state = S6 & input = dec -> X !(state = S6))
+	--G(state = S6 & !(input = dec) -> X !(state = S6))
+
+	--G(state = S6 & input = acc -> X !(state = S4))
+	--G(state = S6 & !(input = acc) -> X !(state = S4))
+
+	--G(state = S6 & input = gas -> X !(state = S4))
+	--G(state = S6 & !(input = gas) -> X !(state = S4))
+
+	--G(state = S6 & input = button -> X !(state = S1))
+	--G(state = S6 & !(input = button) -> X !(state = S1))
+
+
+
+	--G(state = S7 & input = brake -> X !(state = S2))
+	--G(state = S7 & !(input = brake) -> X !(state = S2))
+
+	--G(state = S7 & input = dec -> X !(state = S2))
+	--G(state = S7 & !(input = dec) -> X !(state = S2))
+
+	--G(state = S7 & input = acc -> X !(state = S7))
+	--G(state = S7 & !(input = acc) -> X !(state = S7))
+
+	--G(state = S7 & input = gas -> X !(state = S7))
+	--G(state = S7 & !(input = gas) -> X !(state = S7))
+
+	--G(state = S7 & input = button -> X !(state = S8))
+	--G(state = S7 & !(input = button) -> X !(state = S8))
+
+
+
+
+	--G(state = S8 & input = brake -> X !(state = S4))
+	--G(state = S8 & !(input = brake) -> X !(state = S4))
+
+	--G(state = S8 & input = dec -> X !(state = S4))
+	--G(state = S8 & !(input = dec) -> X !(state = S4))
+
+	--G(state = S8 & input = acc -> X !(state = S8))
+	--G(state = S8 & !(input = acc) -> X !(state = S8))
+
+	--G(state = S8 & input = gas -> X !(state = S8))
+	--G(state = S8 & !(input = gas) -> X !(state = S8))
+
+	--G(state = S8 & input = button -> X !(state = S7))
+	--G(state = S8 & !(input = button) -> X !(state = S7))
+
+
+
+-- 1. Whenever the brake pedal or gas pedal is pressed in the cruise mode the cruise controller will be disengaged.
+
+	--G(state = S4 & (input = gas | input = brake) -> X(state = S5 | state = S6))
+
+	-- OR
+
+	--G((modeBit1 = FALSE & modeBit2 = TRUE) & (input = gas | input = brake) -> X (modeBit1 = TRUE & modeBit2 = FALSE))
+
+	
+	--Trap Property:
+
+	F(state = S4 & (input = gas | input = brake) & X!(state = S5 | state = S6))
+
+	-- OR
+
+	--F((modeBit1 = FALSE & modeBit2 = TRUE) & (input = gas | input = brake) & X !(modeBit1 = TRUE & modeBit2 = FALSE))
+
+
+
+-- 2. If the cruise controller is in cruise mode it will remain in the cruise mode even if the vehicle is going uphill or downhill.
+
+	--G(state = S4 & (input = dec | input = acc) -> X (state = S4))
+
+	-- OR
+
+	--G((modeBit1 = FALSE & modeBit2 = TRUE) & (speedBit1 = FALSE & speedBit2 = TRUE) & (input = dec | input = acc) -> X (speedBit1 = FALSE & speedBit2 = TRUE))
+
+
+	--Trap Property:
+	--F(state = S4 & (input = dec | input = acc) & X !(state = S4))
+	
+	--F((modeBit1 = FALSE & modeBit2 = TRUE) & (speedBit1 = FALSE & speedBit2 = TRUE) & (input = dec | input = acc) & X !(speedBit1 = FALSE & speedBit2 = TRUE))
+
+
+
+-- 3. The cruise controller will eventually stop when the brake is applied no matter which mode is it in currently.
+
+
+	--F(((modeBit1 = FALSE & modeBit2 = FALSE) | (modeBit1 = FALSE & modeBit2 = TRUE) | (modeBit1 = TRUE & modeBit2 = FALSE)) & input = brake -> X(buttonBit = FALSE))
+
+
+	--Trap Property:
+
+	--G(((modeBit1 = FALSE & modeBit2 = FALSE) | (modeBit1 = FALSE & modeBit2 = TRUE) | (modeBit1 = TRUE & modeBit2 = FALSE)) & input = brake & X(buttonBit = FALSE))
+
+	------------------
+	--G(((modeBit1 = FALSE & modeBit2 = FALSE) | (modeBit1 = FALSE & modeBit2 = TRUE) | (modeBit1 = TRUE & modeBit2 = FALSE)) & input = brake -> X!(buttonBit = FALSE))
+
+
+
+
+-- 4. The cruise controller once in the disengaged mode will remain in this mode no matter even if it received acceleration via
+--the gas pedal or external accelaration while going downhill.
+
+
+
+	--G((state = S5) & (input = gas | input = acc) -> X!(state = S5))
+	
+	--OR
+
+	--G((modeBit1 = TRUE & modeBit2 = FALSE) & (speedBit1 = TRUE & speedBit2 = FALSE) & (input = acc | input = gas) -> X(modeBit1 = TRUE & modeBit2 = FALSE))
+
+
+	--Trap Property:
+
+	--F((state = S5) & (input = gas | input = acc) & X!(state = S5))
+	
+	--OR
+
+	--F((modeBit1 = TRUE & modeBit2 = FALSE) & (speedBit1 = TRUE & speedBit2 = FALSE) & (input = acc | input = gas) & X!(modeBit1 = TRUE & modeBit2 = FALSE))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
